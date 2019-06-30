@@ -1,14 +1,16 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+    <div class="content">
+        <div id="map">
+        </div>
+        <div class="container">
+            <button (click)="start()">Start</button>
+            <button (click)="stop()">Stop</button>
+        </div>
+        <div>
+            Prędkość: {{actualSpeed | number: '1.0-2' }} km/h
+        </div>
+        <div>
+            Dystans: {{distance | number: '1.0-2' }} km
+        </div>
+    </div>
 </ion-content>
