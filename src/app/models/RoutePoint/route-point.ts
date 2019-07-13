@@ -1,21 +1,15 @@
-
-import { PointOnMap } from './point-on-map';
 import { TimeValue } from './time-value';
+import { LngLat } from 'mapbox-gl';
 declare let L;
-export class RoutePoint implements PointOnMap, TimeValue {
+export class RoutePoint extends LngLat implements TimeValue {
 
-    private latitude: number;
-    private longtitude: number;
     private dateOfMessuring: Date;
 
     constructor(latitude: number, longtitude: number, date: Date) {
-        this.latitude = latitude;
-        this.longtitude = longtitude;
+        super(longtitude,latitude);
         this.dateOfMessuring = date;
     }
 
-    public getLatitude = () => { return this.latitude; }
-    public getLongtitude = () => { return this.longtitude; }
     public getHoursPart = () => { return this.dateOfMessuring.getHours(); }
     public getMinutesPart = () => { return this.dateOfMessuring.getMinutes(); }
     public getSecondsPart = () => { return this.dateOfMessuring.getSeconds(); }

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { RoutePoint } from './route-point';
+import { RoutePoint } from '../../models/RoutePoint/route-point';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation/ngx';
 import { Observable, Subject } from 'rxjs';
-import { GeolocationOptions } from './geolocation-options';
+import { GeoLocationOptions } from './geo-location-options';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class LocationService {
   ) {
 
     this.locationSubject = new Subject<RoutePoint>();
-    let options = new GeolocationOptions();
+    let options = new GeoLocationOptions();
     options.enableHighAccuracy = true;
     this.watchLocation = this.geoLocation.watchPosition(options);
     this.watchLocation.subscribe((data) => {

@@ -40,16 +40,11 @@
               },
               {
                 "input": "src/app/app.scss"
-              },
-              {
-                "input": "src/assets/leaflet/leaflet.css"
               }
               
             ],
             "scripts": [
-              {
-                "input": "src/assets/leaflet/leaflet.js"
-              }
+              
             ],
             "es5BrowserSupport": true
           },
