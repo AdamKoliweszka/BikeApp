@@ -4,22 +4,28 @@ import { Observable } from "rxjs";
 import { Store, select } from "@ngrx/store";
 import { ActualRouteState } from "src/app/store/actual-route/actual-route.reducers";
 import {
+  selectActualPostion,
   selectActualSpeed,
   selectDistance
 } from "src/app/store/actual-route/actual-route.selectors";
 import {
   setRoute,
-  setActualSpeed
+  setActualPosition
 } from "src/app/store/actual-route/actual-route.actions";
+import { RoutePoint } from "src/app/models/RoutePoint/route-point";
 
 @Injectable({
   providedIn: "root"
 })
 export class ActualRouteDataService {
+  private actualPosition$ = this.store.select(selectActualPostion);
   private actualSpeed$ = this.store.select(selectActualSpeed);
   private actualDistance$ = this.store.select(selectDistance);
   constructor(private store: Store<ActualRouteState>) {}
 
+  getPosition(): Observable<RoutePoint> {
+    return this.actualPosition$;
+  }
   getSpeed(): Observable<number> {
     return this.actualSpeed$;
   }
@@ -32,8 +38,7 @@ export class ActualRouteDataService {
     this.store.dispatch(setRoute({ actualRoute }));
   }
 
-  updateActualSpeed(actualSpeed: number) {
-    console.log("update " + actualSpeed);
-    this.store.dispatch(setActualSpeed({ actualSpeed }));
+  updateActualPosition(actualPosition: RoutePoint) {
+    this.store.dispatch(setActualPosition({ actualPosition }));
   }
 }

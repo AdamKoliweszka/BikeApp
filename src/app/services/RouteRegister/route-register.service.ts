@@ -4,6 +4,7 @@ import { LocationService } from "../location/location.service";
 import { Subscription, Subject, Observable } from "rxjs";
 import { RoutePoint } from "../../models/RoutePoint/route-point";
 import { RouteSegment } from "src/app/models/RouteSegment/route-segment";
+import { ActualRouteDataService } from "../store/actual-route-data.service";
 
 @Injectable({
   providedIn: "root"
@@ -14,10 +15,26 @@ export class RouteRegisterService {
   private lastPoint: RoutePoint;
   private subject: Subject<Route>;
   private isActive: boolean;
-  constructor(private locationService: LocationService) {
+  actualPosition$: Observable<
+    RoutePoint
+  > = this.actualRouteDataService.getPosition();
+  constructor(
+    private locationService: LocationService,
+    private actualRouteDataService: ActualRouteDataService
+  ) {
     this.isActive = false;
     this.actualRoute = new Route();
     this.subject = new Subject<Route>();
+    this.actualPosition$.subscribe(data => {
+      let point = data;
+      if (this.lastPoint && this.isActive) {
+        let lineSegment = new RouteSegment(this.lastPoint, point);
+        this.actualRoute.addSegment(lineSegment);
+        this.subject.next(this.actualRoute);
+      }
+      this.lastPoint = point;
+    });
+    /*
     this.locationSubscription = this.locationService
       .watchPosition()
       .subscribe(data => {
@@ -29,6 +46,7 @@ export class RouteRegisterService {
         }
         this.lastPoint = point;
       });
+      */
   }
   public watchRoute(): Observable<Route> {
     return this.subject.asObservable();

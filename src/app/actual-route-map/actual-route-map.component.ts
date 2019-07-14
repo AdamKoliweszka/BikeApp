@@ -4,7 +4,7 @@ import { RoutePoint } from "../models/RoutePoint/route-point";
 import { LocationService } from "../services/location/location.service";
 import { RouteRegisterService } from "../services/RouteRegister/route-register.service";
 import { ActualRouteDataService } from "../services/store/actual-route-data.service";
-import { Subscription } from "rxjs";
+import { Subscription, Observable } from "rxjs";
 
 @Component({
   selector: "app-actual-route-map",
@@ -13,6 +13,9 @@ import { Subscription } from "rxjs";
 })
 export class ActualRouteMapComponent implements OnInit {
   map: MapInstance;
+  actualPosition$: Observable<
+    RoutePoint
+  > = this.actualRouteDataService.getPosition();
   locationSubscription: Subscription;
   routeSubscription: Subscription;
   constructor(
@@ -22,11 +25,10 @@ export class ActualRouteMapComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    let actualDate = new Date();
     let startPoint = new RoutePoint(
       50.86432551549099,
       17.470316290855408,
-      actualDate
+      new Date()
     );
 
     this.map = new MapInstance("map", startPoint);
@@ -34,6 +36,11 @@ export class ActualRouteMapComponent implements OnInit {
     this.map.loadMap();
     this.map.addMarker(startPoint);
 
+    this.actualPosition$.subscribe(data => {
+      this.map.setFocusPoint(data);
+      this.map.updatePositionOfMarker(data);
+    });
+    /*
     this.locationSubscription = this.locationService
       .watchPosition()
       .subscribe(data => {
@@ -41,7 +48,7 @@ export class ActualRouteMapComponent implements OnInit {
         this.map.setFocusPoint(point);
         this.map.updatePositionOfMarker(point);
       });
-
+      */
     this.routeSubscription = this.routeRegisterService
       .watchRoute()
       .subscribe(data => {
@@ -49,7 +56,6 @@ export class ActualRouteMapComponent implements OnInit {
         let route = data;
         this.actualRouteDataService.updateActualRoute(route);
         this.map.updateDataOfRouteLayer("tour", route);
-        this.actualRouteDataService.updateActualSpeed(route.actualSpeed);
         this.actualRouteDataService.updateActualRoute(route);
       });
   }

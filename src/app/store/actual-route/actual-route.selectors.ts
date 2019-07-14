@@ -6,12 +6,17 @@ export const actualRouteFeatureSelector = createFeatureSelector(
   actualRouteStoreKey
 );
 
-export const selectActualSpeed = createSelector(
+export const selectActualPostion = createSelector(
   actualRouteFeatureSelector,
-  (state: ActualRouteState) => state.actualRoute.actualSpeed
+  (state: ActualRouteState) => state.actualPosition
 );
 
 export const selectDistance = createSelector(
   actualRouteFeatureSelector,
   (state: ActualRouteState) => state.actualRoute.distance
+);
+
+export const selectActualSpeed = createSelector(
+  actualRouteFeatureSelector,
+  (state: ActualRouteState) => state.actualRoute.actualSpeed
 );
