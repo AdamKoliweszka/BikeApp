@@ -4,19 +4,18 @@ import { GeoJSONSource } from "mapbox-gl";
 
 export class Route {
   segments: RouteSegment[];
+  actualSpeed: number;
+  distance: number;
 
   constructor() {
     this.segments = [];
+    this.actualSpeed = 0;
+    this.distance = 0;
   }
   public addSegment(segment: RouteSegment): void {
+    this.actualSpeed = segment.speedInKmH;
+    this.distance += segment.distanceInKm;
     this.segments.push(segment);
-  }
-  public getFullDistance(): number {
-    let distance = 0;
-    for (let segment of this.segments) {
-      distance += segment.distanceInKm;
-    }
-    return distance;
   }
   public getFullTime(): number {
     let time = 0;
@@ -24,9 +23,6 @@ export class Route {
       time += segment.timeInMiliseconds;
     }
     return time;
-  }
-  public getActualSpeed(): number {
-    return this.segments[this.segments.length - 1].speedInKmH;
   }
   public getSegments = () => {
     return this.segments;

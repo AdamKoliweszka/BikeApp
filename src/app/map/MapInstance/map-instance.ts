@@ -2,8 +2,6 @@ import { BikeMarkerIcon } from "../BikeIcon/bike-marker-icon";
 import * as mapboxgl from "mapbox-gl";
 import { environment } from "../../../environments/environment";
 import { RouteLayer } from "../Layers/RouteLayer/route-layer";
-import { FeatureCollection } from "geojson";
-import { RouteSource } from "../Layers/RouteLayer/route-source";
 import { Route } from "src/app/models/Route/route";
 
 export class MapInstance {

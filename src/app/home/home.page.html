@@ -1,15 +1,11 @@
 <ion-content>
-    <div class="content">
-        <div id="map"></div>
-        <div class="container">
-            <button (click)="start()">Start</button>
-            <button (click)="stop()">Stop</button>
-        </div>
-        <div>
-            Prędkość: {{actualSpeed | number: '1.0-2' }} km/h
-        </div>
-        <div>
-            Dystans: {{distance | number: '1.0-2' }} km
-        </div>
+  <div class="content">
+    <app-actual-route-map></app-actual-route-map>
+    <div class="container">
+      <button (click)="start()">Start</button>
+      <button (click)="stop()">Stop</button>
     </div>
+    <div>Prędkość: {{ actualSpeed$ | async | number: "1.0-2" }} km/h</div>
+    <div>Dystans: {{ distance$ | async | number: "1.0-2" }} km</div>
+  </div>
 </ion-content>
