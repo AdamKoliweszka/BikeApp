@@ -20,3 +20,8 @@ export const selectActualSpeed = createSelector(
   actualRouteFeatureSelector,
   (state: ActualRouteState) => state.actualRoute.actualSpeed
 );
+
+export const selectActualRoute = createSelector(
+  actualRouteFeatureSelector,
+  (state: ActualRouteState) => state.actualRoute
+);

@@ -6,7 +6,8 @@ import { ActualRouteState } from "src/app/store/actual-route/actual-route.reduce
 import {
   selectActualPostion,
   selectActualSpeed,
-  selectDistance
+  selectDistance,
+  selectActualRoute
 } from "src/app/store/actual-route/actual-route.selectors";
 import {
   setRoute,
@@ -21,6 +22,7 @@ export class ActualRouteDataService {
   private actualPosition$ = this.store.select(selectActualPostion);
   private actualSpeed$ = this.store.select(selectActualSpeed);
   private actualDistance$ = this.store.select(selectDistance);
+  private actualRoute$ = this.store.select(selectActualRoute);
   constructor(private store: Store<ActualRouteState>) {}
 
   getPosition(): Observable<RoutePoint> {
@@ -32,6 +34,10 @@ export class ActualRouteDataService {
 
   getDistance(): Observable<number> {
     return this.actualDistance$;
+  }
+
+  getRoute(): Observable<Route> {
+    return this.actualRoute$;
   }
 
   updateActualRoute(actualRoute: Route) {

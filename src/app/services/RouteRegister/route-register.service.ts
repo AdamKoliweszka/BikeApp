@@ -11,45 +11,25 @@ import { ActualRouteDataService } from "../store/actual-route-data.service";
 })
 export class RouteRegisterService {
   private actualRoute: Route;
-  private locationSubscription: Subscription;
   private lastPoint: RoutePoint;
-  private subject: Subject<Route>;
   private isActive: boolean;
   actualPosition$: Observable<
     RoutePoint
   > = this.actualRouteDataService.getPosition();
-  constructor(
-    private locationService: LocationService,
-    private actualRouteDataService: ActualRouteDataService
-  ) {
+  constructor(private actualRouteDataService: ActualRouteDataService) {
     this.isActive = false;
     this.actualRoute = new Route();
-    this.subject = new Subject<Route>();
     this.actualPosition$.subscribe(data => {
       let point = data;
       if (this.lastPoint && this.isActive) {
         let lineSegment = new RouteSegment(this.lastPoint, point);
         this.actualRoute.addSegment(lineSegment);
-        this.subject.next(this.actualRoute);
+        let copyOfRoute = Object.assign({}, this.actualRoute);
+        Object.setPrototypeOf(copyOfRoute, Route.prototype);
+        this.actualRouteDataService.updateActualRoute(copyOfRoute);
       }
       this.lastPoint = point;
     });
-    /*
-    this.locationSubscription = this.locationService
-      .watchPosition()
-      .subscribe(data => {
-        let point = data;
-        if (this.lastPoint && this.isActive) {
-          let lineSegment = new RouteSegment(this.lastPoint, point);
-          this.actualRoute.addSegment(lineSegment);
-          this.subject.next(this.actualRoute);
-        }
-        this.lastPoint = point;
-      });
-      */
-  }
-  public watchRoute(): Observable<Route> {
-    return this.subject.asObservable();
   }
 
   public startRegister(): void {

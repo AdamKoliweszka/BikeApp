@@ -5,6 +5,7 @@ import { LocationService } from "../services/location/location.service";
 import { RouteRegisterService } from "../services/RouteRegister/route-register.service";
 import { ActualRouteDataService } from "../services/store/actual-route-data.service";
 import { Subscription, Observable } from "rxjs";
+import { Route } from "../models/Route/route";
 
 @Component({
   selector: "app-actual-route-map",
@@ -16,13 +17,8 @@ export class ActualRouteMapComponent implements OnInit {
   actualPosition$: Observable<
     RoutePoint
   > = this.actualRouteDataService.getPosition();
-  locationSubscription: Subscription;
-  routeSubscription: Subscription;
-  constructor(
-    private locationService: LocationService,
-    private routeRegisterService: RouteRegisterService,
-    private actualRouteDataService: ActualRouteDataService
-  ) {}
+  actualRoute$: Observable<Route> = this.actualRouteDataService.getRoute();
+  constructor(private actualRouteDataService: ActualRouteDataService) {}
 
   ngOnInit() {
     let startPoint = new RoutePoint(
@@ -40,28 +36,10 @@ export class ActualRouteMapComponent implements OnInit {
       this.map.setFocusPoint(data);
       this.map.updatePositionOfMarker(data);
     });
-    /*
-    this.locationSubscription = this.locationService
-      .watchPosition()
-      .subscribe(data => {
-        let point = data;
-        this.map.setFocusPoint(point);
-        this.map.updatePositionOfMarker(point);
-      });
-      */
-    this.routeSubscription = this.routeRegisterService
-      .watchRoute()
-      .subscribe(data => {
-        console.log(data);
-        let route = data;
-        this.actualRouteDataService.updateActualRoute(route);
-        this.map.updateDataOfRouteLayer("tour", route);
-        this.actualRouteDataService.updateActualRoute(route);
-      });
+    this.actualRoute$.subscribe(data => {
+      this.map.updateDataOfRouteLayer("tour", data);
+    });
   }
 
-  ngOnDestroy() {
-    this.locationSubscription.unsubscribe();
-    this.routeSubscription.unsubscribe();
-  }
+  ngOnDestroy() {}
 }
