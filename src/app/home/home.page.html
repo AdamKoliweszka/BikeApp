@@ -5,7 +5,9 @@
       <button (click)="start()">Start</button>
       <button (click)="stop()">Stop</button>
     </div>
-    <div>Prędkość: {{ actualSpeed$ | async | number: "1.0-2" }} km/h</div>
-    <div>Dystans: {{ distance$ | async | number: "1.0-2" }} km</div>
+    <app-actual-route-info
+      [speed]="actualSpeed$ | async"
+      [distance]="distance$ | async"
+    ></app-actual-route-info>
   </div>
 </ion-content>

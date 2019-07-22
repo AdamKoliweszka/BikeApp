@@ -5,6 +5,7 @@ import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { HomePage } from "./home.page";
 import { ActualRouteMapComponent } from "../actual-route-map/actual-route-map.component";
+import { ActualRouteInfoComponent } from "../actual-route-info/actual-route-info.component";
 @NgModule({
   imports: [
     CommonModule,
@@ -17,6 +18,6 @@ import { ActualRouteMapComponent } from "../actual-route-map/actual-route-map.co
       }
     ])
   ],
-  declarations: [HomePage, ActualRouteMapComponent]
+  declarations: [HomePage, ActualRouteMapComponent, ActualRouteInfoComponent]
 })
 export class HomePageModule {}
