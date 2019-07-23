@@ -1,10 +1,7 @@
 <ion-content>
   <div class="content">
     <app-actual-route-map></app-actual-route-map>
-    <div class="container">
-      <button (click)="start()">Start</button>
-      <button (click)="stop()">Stop</button>
-    </div>
+    <app-actual-route-options></app-actual-route-options>
     <app-actual-route-info
       [speed]="actualSpeed$ | async"
       [distance]="distance$ | async"

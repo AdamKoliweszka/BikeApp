@@ -6,6 +6,7 @@ import { RouterModule } from "@angular/router";
 import { HomePage } from "./home.page";
 import { ActualRouteMapComponent } from "../actual-route-map/actual-route-map.component";
 import { ActualRouteInfoComponent } from "../actual-route-info/actual-route-info.component";
+import { ActualRouteOptionsComponent } from "../actual-route-options/actual-route-options.component";
 @NgModule({
   imports: [
     CommonModule,
@@ -18,6 +19,11 @@ import { ActualRouteInfoComponent } from "../actual-route-info/actual-route-info
       }
     ])
   ],
-  declarations: [HomePage, ActualRouteMapComponent, ActualRouteInfoComponent]
+  declarations: [
+    HomePage,
+    ActualRouteMapComponent,
+    ActualRouteInfoComponent,
+    ActualRouteOptionsComponent
+  ]
 })
 export class HomePageModule {}

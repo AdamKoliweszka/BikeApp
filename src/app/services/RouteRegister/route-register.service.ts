@@ -13,42 +13,30 @@ export class RouteRegisterService {
   private actualRoute$: Observable<
     Route
   > = this.actualRouteDataService.getRoute();
+  private isRegistering$: Observable<
+    boolean
+  > = this.actualRouteDataService.getIsRegistering();
   private lastPoint: RoutePoint;
-  private isActive: boolean;
   actualPosition$: Observable<
     RoutePoint
   > = this.actualRouteDataService.getPosition();
   constructor(private actualRouteDataService: ActualRouteDataService) {
-    this.isActive = false;
     this.actualPosition$.subscribe(data => {
       let point = data;
-      if (this.lastPoint && this.isActive) {
+      if (this.lastPoint) {
         let lineSegment = new RouteSegment(this.lastPoint, point);
-        /*
-        this.actualRoute$.toPromise().then(value => {
-          console.log(value);
-          value.addSegment(lineSegment);
-          let copyOfRoute = Object.assign({}, value);
-          Object.setPrototypeOf(copyOfRoute, Route.prototype);
-          this.actualRouteDataService.updateActualRoute(copyOfRoute);
-        });
-        */
         this.actualRoute$.pipe(take(1)).subscribe(value => {
-          console.log(value);
-          value.addSegment(lineSegment);
-          let copyOfRoute = Object.assign({}, value);
-          Object.setPrototypeOf(copyOfRoute, Route.prototype);
-          this.actualRouteDataService.updateActualRoute(copyOfRoute);
+          this.isRegistering$.pipe(take(1)).subscribe(v => {
+            if (v) {
+              value.addSegment(lineSegment);
+              let copyOfRoute = Object.assign({}, value);
+              Object.setPrototypeOf(copyOfRoute, Route.prototype);
+              this.actualRouteDataService.updateActualRoute(copyOfRoute);
+            }
+          });
         });
       }
       this.lastPoint = point;
     });
-  }
-
-  public startRegister(): void {
-    this.isActive = true;
-  }
-  public stopRegister(): void {
-    this.isActive = false;
   }
 }

@@ -11,3 +11,8 @@ export const setActualPosition = createAction(
   "[Position] Set",
   props<{ actualPosition: RoutePoint }>()
 );
+
+export const setIsActiveRegistering = createAction(
+  "[Registering] Set",
+  props<{ isRegistering: boolean }>()
+);

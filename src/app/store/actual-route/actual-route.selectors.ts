@@ -25,3 +25,8 @@ export const selectActualRoute = createSelector(
   actualRouteFeatureSelector,
   (state: ActualRouteState) => state.actualRoute
 );
+
+export const selectIsRegistering = createSelector(
+  actualRouteFeatureSelector,
+  (state: ActualRouteState) => state.isRegistering
+);

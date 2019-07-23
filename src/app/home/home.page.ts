@@ -14,18 +14,13 @@ export class HomePage implements OnInit {
   map: MapInstance;
   actualSpeed$: Observable<number> = this.actualRouteDataService.getSpeed();
   distance$: Observable<number> = this.actualRouteDataService.getDistance();
+  isRegistering$: Observable<
+    boolean
+  > = this.actualRouteDataService.getIsRegistering();
+
   constructor(
-    private routeRegisterService: RouteRegisterService,
     private actualRouteDataService: ActualRouteDataService
   ) {}
 
   ngOnInit() {}
-
-  start(): void {
-    this.routeRegisterService.startRegister();
-  }
-
-  stop(): void {
-    this.routeRegisterService.stopRegister();
-  }
 }

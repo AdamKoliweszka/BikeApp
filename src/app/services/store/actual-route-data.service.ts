@@ -7,11 +7,13 @@ import {
   selectActualPostion,
   selectActualSpeed,
   selectDistance,
-  selectActualRoute
+  selectActualRoute,
+  selectIsRegistering
 } from "src/app/store/actual-route/actual-route.selectors";
 import {
   setRoute,
-  setActualPosition
+  setActualPosition,
+  setIsActiveRegistering
 } from "src/app/store/actual-route/actual-route.actions";
 import { RoutePoint } from "src/app/models/RoutePoint/route-point";
 
@@ -23,6 +25,8 @@ export class ActualRouteDataService {
   private actualSpeed$ = this.store.select(selectActualSpeed);
   private actualDistance$ = this.store.select(selectDistance);
   private actualRoute$ = this.store.select(selectActualRoute);
+  private actualStateOfRegistering$ = this.store.select(selectIsRegistering);
+
   constructor(private store: Store<ActualRouteState>) {}
 
   getPosition(): Observable<RoutePoint> {
@@ -40,11 +44,19 @@ export class ActualRouteDataService {
     return this.actualRoute$;
   }
 
+  getIsRegistering(): Observable<boolean> {
+    return this.actualStateOfRegistering$;
+  }
+
   updateActualRoute(actualRoute: Route) {
     this.store.dispatch(setRoute({ actualRoute }));
   }
 
   updateActualPosition(actualPosition: RoutePoint) {
     this.store.dispatch(setActualPosition({ actualPosition }));
+  }
+
+  updateIsRegistering(isRegistering: boolean) {
+    this.store.dispatch(setIsActiveRegistering({ isRegistering }));
   }
 }
