@@ -1,4 +1,4 @@
-export class GeolocationOptions {
+export class GeoLocationOptions {
     maximumAge : number;
     timeout : number;
     enableHighAccuracy : boolean;
