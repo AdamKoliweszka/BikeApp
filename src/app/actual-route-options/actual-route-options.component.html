@@ -1,4 +1,5 @@
 <div class="container">
-  <button mat-fab (click)="start()">Start</button>
+  <button mat-fab *ngIf="isRecording" (click)="start()">Pausa</button>
+  <button mat-fab *ngIf="!isRecording" (click)="start()">Start</button>
   <button mat-fab (click)="stop()">Stop</button>
 </div>
