@@ -40,7 +40,8 @@ export class MapInstance {
       style: "mapbox://styles/mapbox/streets-v11", // stylesheet location
       center: this.startPoint, // starting position [lng, lat]
       zoom: 18, // starting zoom
-      trackResize: true
+      trackResize: true,
+      attributionControl: false
     });
 
     this.map.on("load", () => {

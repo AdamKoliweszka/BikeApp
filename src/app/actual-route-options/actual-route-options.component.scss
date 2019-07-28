@@ -1,10 +1,8 @@
 .container {
-  width: 100%;
+  width: 90%;
   display: flex;
   justify-content: space-between;
   background: transparent;
-}
-.container button {
-  //background-color: #007bff;
-  //color: white;
+  position: absolute;
+  top: 85vh;
 }
