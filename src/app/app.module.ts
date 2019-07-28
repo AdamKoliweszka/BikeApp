@@ -12,7 +12,6 @@ import { Geolocation } from "@ionic-native/geolocation/ngx";
 import { StoreModule } from "@ngrx/store";
 import { ActualRouteStateModule } from "./store/actual-route/actual-route-store.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { MatButtonModule } from "@angular/material/button";
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,8 +22,7 @@ import { MatButtonModule } from "@angular/material/button";
     AppRoutingModule,
     StoreModule.forRoot({}),
     ActualRouteStateModule,
-    BrowserAnimationsModule,
-    MatButtonModule
+    BrowserAnimationsModule
   ],
   providers: [
     BackgroundMode,

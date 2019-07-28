@@ -7,12 +7,14 @@ import { HomePage } from "./home.page";
 import { ActualRouteMapComponent } from "../actual-route-map/actual-route-map.component";
 import { ActualRouteInfoComponent } from "../actual-route-info/actual-route-info.component";
 import { ActualRouteOptionsComponent } from "../actual-route-options/actual-route-options.component";
+import { MatButtonModule } from "@angular/material/button";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    MatButtonModule,
     RouterModule.forChild([
       {
         path: "",
