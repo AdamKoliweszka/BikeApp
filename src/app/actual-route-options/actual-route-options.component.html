@@ -1,5 +1,15 @@
-<div class="container">
-  <button mat-fab *ngIf="isRecording" (click)="start()">Pausa</button>
-  <button mat-fab *ngIf="!isRecording" (click)="start()">Start</button>
-  <button mat-fab (click)="stop()">Stop</button>
+<div class="playing-button">
+  <button mat-fab *ngIf="isRecording" (click)="start()">
+    <fa-icon [icon]="pauseIcon"></fa-icon>
+  </button>
+  <button mat-fab *ngIf="!isRecording" (click)="start()">
+    <fa-icon [icon]="playIcon"></fa-icon>
+  </button>
 </div>
+<button mat-fab class="stop-button" (click)="stop()">
+  <fa-icon [icon]="stopIcon"></fa-icon>
+</button>
+
+<button mat-fab class="return-button" (click)="back()">
+  <fa-icon [icon]="backIcon"></fa-icon>
+</button>

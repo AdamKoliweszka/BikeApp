@@ -8,13 +8,14 @@ import { ActualRouteMapComponent } from "../actual-route-map/actual-route-map.co
 import { ActualRouteInfoComponent } from "../actual-route-info/actual-route-info.component";
 import { ActualRouteOptionsComponent } from "../actual-route-options/actual-route-options.component";
 import { MatButtonModule } from "@angular/material/button";
-
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     MatButtonModule,
+    FontAwesomeModule,
     RouterModule.forChild([
       {
         path: "",

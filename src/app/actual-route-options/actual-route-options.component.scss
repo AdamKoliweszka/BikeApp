@@ -1,8 +1,16 @@
-.container {
-  width: 90%;
-  display: flex;
-  justify-content: space-between;
-  background: transparent;
+.playing-button {
   position: absolute;
   top: 85vh;
+  left: 5vw;
+}
+.stop-button {
+  position: absolute;
+  top: 85vh;
+  left: 76vw;
+}
+
+.return-button {
+  position: absolute;
+  top: 5vh;
+  left: 5vw;
 }
