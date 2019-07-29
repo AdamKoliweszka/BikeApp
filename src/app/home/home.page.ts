@@ -3,7 +3,7 @@ import { MapInstance } from "../map/MapInstance/map-instance";
 import { Subscription, Observable } from "rxjs";
 import { RouteRegisterService } from "../services/RouteRegister/route-register.service";
 import { ActualRouteDataService } from "../services/store/actual-route-data.service";
-import { ActualRouteMapComponent } from "../actual-route-map/actual-route-map.component";
+import { ActualRouteMapComponent } from "../components/actual-route/actual-route-map/actual-route-map.component";
 
 @Component({
   selector: "app-home",
@@ -18,9 +18,7 @@ export class HomePage implements OnInit {
     boolean
   > = this.actualRouteDataService.getIsRegistering();
 
-  constructor(
-    private actualRouteDataService: ActualRouteDataService
-  ) {}
+  constructor(private actualRouteDataService: ActualRouteDataService) {}
 
   ngOnInit() {}
 }

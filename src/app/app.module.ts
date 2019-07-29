@@ -12,6 +12,7 @@ import { Geolocation } from "@ionic-native/geolocation/ngx";
 import { StoreModule } from "@ngrx/store";
 import { ActualRouteStateModule } from "./store/actual-route/actual-route-store.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +23,8 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     AppRoutingModule,
     StoreModule.forRoot({}),
     ActualRouteStateModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FontAwesomeModule
   ],
   providers: [
     BackgroundMode,

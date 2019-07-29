@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { ActualRouteDataService } from "../services/store/actual-route-data.service";
+import { ActualRouteDataService } from "../../../services/store/actual-route-data.service";
 import {
   faPlay,
   faPause,

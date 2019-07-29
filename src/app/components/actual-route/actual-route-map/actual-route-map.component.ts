@@ -1,11 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import { MapInstance } from "../map/MapInstance/map-instance";
-import { RoutePoint } from "../models/RoutePoint/route-point";
-import { LocationService } from "../services/location/location.service";
-import { RouteRegisterService } from "../services/RouteRegister/route-register.service";
-import { ActualRouteDataService } from "../services/store/actual-route-data.service";
+import { MapInstance } from "../../../map/MapInstance/map-instance";
+import { RoutePoint } from "../../../models/RoutePoint/route-point";
+import { LocationService } from "../../../services/location/location.service";
+import { RouteRegisterService } from "../../../services/RouteRegister/route-register.service";
+import { ActualRouteDataService } from "../../../services/store/actual-route-data.service";
 import { Subscription, Observable } from "rxjs";
-import { Route } from "../models/Route/route";
+import { Route } from "../../../models/Route/route";
 
 @Component({
   selector: "app-actual-route-map",

@@ -1,0 +1,10 @@
+<div class="content">
+  <app-actual-route-map></app-actual-route-map>
+  <app-actual-route-options
+    [isRecording]="isRegistering$ | async"
+  ></app-actual-route-options>
+  <app-actual-route-info
+    [speed]="actualSpeed$ | async"
+    [distance]="distance$ | async"
+  ></app-actual-route-info>
+</div>
