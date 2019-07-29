@@ -12,7 +12,12 @@ export const setActualPosition = createAction(
   props<{ actualPosition: RoutePoint }>()
 );
 
-export const setIsActiveRegistering = createAction(
+export const setIsRegistering = createAction(
   "[Registering] Set",
   props<{ isRegistering: boolean }>()
+);
+
+export const setIsPause = createAction(
+  "[Pause] Set",
+  props<{ isPause: boolean }>()
 );

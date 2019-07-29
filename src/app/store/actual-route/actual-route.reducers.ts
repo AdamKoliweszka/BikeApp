@@ -8,6 +8,7 @@ export interface ActualRouteState {
   actualRoute: Route;
   actualPosition: RoutePoint;
   isRegistering: boolean;
+  isPause: boolean;
 }
 export const initialActualRouteState: ActualRouteState = {
   actualRoute: new Route(),
@@ -16,7 +17,8 @@ export const initialActualRouteState: ActualRouteState = {
     17.470316290855408,
     new Date()
   ),
-  isRegistering: false
+  isRegistering: false,
+  isPause: false
 };
 
 export const actualRouteReducer = createReducer(
@@ -31,10 +33,16 @@ export const actualRouteReducer = createReducer(
       actualPosition
     };
   }),
-  on(ActualRouteActions.setIsActiveRegistering, (state, { isRegistering }) => {
+  on(ActualRouteActions.setIsRegistering, (state, { isRegistering }) => {
     return {
       ...state,
       isRegistering
+    };
+  }),
+  on(ActualRouteActions.setIsPause, (state, { isPause }) => {
+    return {
+      ...state,
+      isPause
     };
   })
 );

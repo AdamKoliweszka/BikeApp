@@ -30,3 +30,8 @@ export const selectIsRegistering = createSelector(
   actualRouteFeatureSelector,
   (state: ActualRouteState) => state.isRegistering
 );
+
+export const selectIsPause = createSelector(
+  actualRouteFeatureSelector,
+  (state: ActualRouteState) => state.isPause
+);

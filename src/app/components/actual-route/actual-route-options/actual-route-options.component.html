@@ -1,15 +1,15 @@
 <div class="playing-button">
-  <button mat-fab *ngIf="isRecording" (click)="start()">
+  <button mat-fab *ngIf="isRegistering && !isPause" (click)="pause()">
     <fa-icon [icon]="pauseIcon"></fa-icon>
   </button>
-  <button mat-fab *ngIf="!isRecording" (click)="start()">
+  <button mat-fab *ngIf="!isRegistering || isPause" (click)="start()">
     <fa-icon [icon]="playIcon"></fa-icon>
   </button>
 </div>
-<button mat-fab class="stop-button" (click)="stop()">
+<button mat-fab *ngIf="isRegistering" class="stop-button" (click)="stop()">
   <fa-icon [icon]="stopIcon"></fa-icon>
 </button>
 
-<a [routerLink]="['/route']" mat-fab class="return-button" (click)="back()">
+<a [routerLink]="['/route']" mat-fab class="return-button">
   <fa-icon [icon]="backIcon"></fa-icon>
 </a>

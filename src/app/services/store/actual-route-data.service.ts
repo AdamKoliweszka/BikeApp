@@ -8,12 +8,14 @@ import {
   selectActualSpeed,
   selectDistance,
   selectActualRoute,
-  selectIsRegistering
+  selectIsRegistering,
+  selectIsPause
 } from "src/app/store/actual-route/actual-route.selectors";
 import {
   setRoute,
   setActualPosition,
-  setIsActiveRegistering
+  setIsPause,
+  setIsRegistering
 } from "src/app/store/actual-route/actual-route.actions";
 import { RoutePoint } from "src/app/models/RoutePoint/route-point";
 
@@ -25,7 +27,8 @@ export class ActualRouteDataService {
   private actualSpeed$ = this.store.select(selectActualSpeed);
   private actualDistance$ = this.store.select(selectDistance);
   private actualRoute$ = this.store.select(selectActualRoute);
-  private actualStateOfRegistering$ = this.store.select(selectIsRegistering);
+  private isRegistering$ = this.store.select(selectIsRegistering);
+  private isPause$ = this.store.select(selectIsPause);
 
   constructor(private store: Store<ActualRouteState>) {}
 
@@ -45,7 +48,11 @@ export class ActualRouteDataService {
   }
 
   getIsRegistering(): Observable<boolean> {
-    return this.actualStateOfRegistering$;
+    return this.isRegistering$;
+  }
+
+  getIsPause(): Observable<boolean> {
+    return this.isPause$;
   }
 
   updateActualRoute(actualRoute: Route) {
@@ -57,6 +64,10 @@ export class ActualRouteDataService {
   }
 
   updateIsRegistering(isRegistering: boolean) {
-    this.store.dispatch(setIsActiveRegistering({ isRegistering }));
+    this.store.dispatch(setIsRegistering({ isRegistering }));
+  }
+
+  updateIsPause(isPause: boolean) {
+    this.store.dispatch(setIsPause({ isPause }));
   }
 }

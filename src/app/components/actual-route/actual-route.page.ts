@@ -18,6 +18,8 @@ export class ActualRoute implements OnInit {
     boolean
   > = this.actualRouteDataService.getIsRegistering();
 
+  isPause$: Observable<boolean> = this.actualRouteDataService.getIsPause();
+
   constructor(private actualRouteDataService: ActualRouteDataService) {}
 
   ngOnInit() {}

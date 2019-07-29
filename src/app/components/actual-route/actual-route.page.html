@@ -1,7 +1,8 @@
 <div class="content">
   <app-actual-route-map></app-actual-route-map>
   <app-actual-route-options
-    [isRecording]="isRegistering$ | async"
+    [isRegistering]="isRegistering$ | async"
+    [isPause]="isPause$ | async"
   ></app-actual-route-options>
   <app-actual-route-info
     [speed]="actualSpeed$ | async"

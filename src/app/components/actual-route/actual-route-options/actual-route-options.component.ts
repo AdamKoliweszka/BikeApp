@@ -17,16 +17,26 @@ export class ActualRouteOptionsComponent implements OnInit {
   playIcon = faPlay;
   stopIcon = faStop;
   backIcon = faChevronLeft;
-  @Input() isRecording: boolean;
+  @Input() isRegistering: boolean;
+  @Input() isPause: boolean;
   constructor(private actualRouteDataService: ActualRouteDataService) {}
 
   ngOnInit() {}
 
   start(): void {
-    this.actualRouteDataService.updateIsRegistering(!this.isRecording);
+    if (!this.isRegistering) {
+      this.actualRouteDataService.updateIsRegistering(true);
+    } else {
+      this.actualRouteDataService.updateIsPause(false);
+    }
   }
 
-  stop(): void {}
+  pause(): void {
+    this.actualRouteDataService.updateIsPause(true);
+  }
 
-  back(): void {}
+  stop(): void {
+    this.actualRouteDataService.updateIsRegistering(false);
+    this.actualRouteDataService.updateIsPause(false);
+  }
 }
