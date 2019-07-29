@@ -10,6 +10,6 @@
   <fa-icon [icon]="stopIcon"></fa-icon>
 </button>
 
-<button mat-fab class="return-button" (click)="back()">
+<a [routerLink]="['/route']" mat-fab class="return-button" (click)="back()">
   <fa-icon [icon]="backIcon"></fa-icon>
-</button>
+</a>

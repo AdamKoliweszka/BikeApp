@@ -7,6 +7,10 @@ const routes: Routes = [
     path: "home",
     loadChildren:
       "./components/actual-route/actual-route.module#ActualRoutePageModule"
+  },
+  {
+    path: "route",
+    loadChildren: "./home/home.module#HomePageModule"
   }
 ];
 
