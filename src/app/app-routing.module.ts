@@ -2,15 +2,16 @@ import { NgModule } from "@angular/core";
 import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
 
 const routes: Routes = [
-  { path: "", redirectTo: "home", pathMatch: "full" },
+  { path: "", redirectTo: "route", pathMatch: "full" },
   {
-    path: "home",
+    path: "actual",
     loadChildren:
       "./components/actual-route/actual-route.module#ActualRoutePageModule"
   },
   {
     path: "route",
-    loadChildren: "./home/home.module#HomePageModule"
+    loadChildren:
+      "./components/route-list/route-list.module#RouteListPageModule"
   }
 ];
 
