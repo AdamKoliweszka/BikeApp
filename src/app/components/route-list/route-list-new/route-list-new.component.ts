@@ -7,7 +7,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
   templateUrl: "./route-list-new.component.html",
   styleUrls: ["./route-list-new.component.scss"]
 })
-export class ActualRouteOptionsComponent implements OnInit {
+export class RouteListNew implements OnInit {
   plusIcon = faPlus;
   @Input() isRegistering: boolean;
   @Input() isPause: boolean;

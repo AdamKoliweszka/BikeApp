@@ -1,21 +1,21 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { RouteListNew } from "./route-list-new.component";
+import { RouteOptions } from "./route-options.component";
 
 describe("ActualRouteOptionsComponent", () => {
-  let component: RouteListNew;
-  let fixture: ComponentFixture<RouteListNew>;
+  let component: RouteOptions;
+  let fixture: ComponentFixture<RouteOptions>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [RouteListNew],
+      declarations: [RouteOptions],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RouteListNew);
+    fixture = TestBed.createComponent(RouteOptions);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
