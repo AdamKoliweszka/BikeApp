@@ -16,7 +16,6 @@ export class HistoryRoutesFileService {
 
   setRoutes(routes: Route[]) {
     let serializedRoutes = serialize(routes);
-    console.log(serializedRoutes);
     this.storage.set("history-routes", serializedRoutes);
   }
 }
