@@ -13,6 +13,7 @@ import { StoreModule } from "@ngrx/store";
 import { ActualRouteStateModule } from "./store/actual-route/actual-route-store.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { HistoryRoutesStateModul } from "./store/history-routes/history-routes-store.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +24,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
     AppRoutingModule,
     StoreModule.forRoot({}),
     ActualRouteStateModule,
+    HistoryRoutesStateModul,
     BrowserAnimationsModule,
     FontAwesomeModule
   ],
