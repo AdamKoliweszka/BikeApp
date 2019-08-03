@@ -6,6 +6,8 @@ import {
   faStop,
   faChevronLeft
 } from "@fortawesome/free-solid-svg-icons";
+import { HistoryRoutesDataService } from "src/app/services/store/history-routes-data.service";
+import { take } from "rxjs/operators";
 
 @Component({
   selector: "app-actual-route-options",
@@ -19,7 +21,10 @@ export class ActualRouteOptionsComponent implements OnInit {
   backIcon = faChevronLeft;
   @Input() isRegistering: boolean;
   @Input() isPause: boolean;
-  constructor(private actualRouteDataService: ActualRouteDataService) {}
+  constructor(
+    private actualRouteDataService: ActualRouteDataService,
+    private historyRoutesDataService: HistoryRoutesDataService
+  ) {}
 
   ngOnInit() {}
 
@@ -36,7 +41,12 @@ export class ActualRouteOptionsComponent implements OnInit {
   }
 
   stop(): void {
-    this.actualRouteDataService.updateIsRegistering(false);
-    this.actualRouteDataService.updateIsPause(false);
+    this.actualRouteDataService
+      .getRoute()
+      .pipe(take(1))
+      .subscribe(route => {
+        this.historyRoutesDataService.addRoute(route);
+        this.actualRouteDataService.stopRegister();
+      });
   }
 }

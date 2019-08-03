@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { MapInstance } from "../../map/MapInstance/map-instance";
 import { Subscription, Observable } from "rxjs";
-import { ActualRouteDataService } from "../../services/store/actual-route-data.service";
+import { Route } from "src/app/models/Route/route";
+import { HistoryRoutesDataService } from "src/app/services/store/history-routes-data.service";
 
 @Component({
   selector: "app-route-list",
@@ -9,7 +9,10 @@ import { ActualRouteDataService } from "../../services/store/actual-route-data.s
   styleUrls: ["route-list.page.scss"]
 })
 export class RouteList implements OnInit {
-  constructor() {}
+  routes$: Observable<Route[]>;
+  constructor(private historyRoutesDataService: HistoryRoutesDataService) {
+    this.routes$ = historyRoutesDataService.getRoutes();
+  }
 
   ngOnInit() {}
 }

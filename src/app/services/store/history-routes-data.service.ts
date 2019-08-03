@@ -5,6 +5,7 @@ import { Store, select } from "@ngrx/store";
 import { HistoryRoutesState } from "src/app/store/history-routes/history-routes.reducers";
 import { selectHistoryRoutes } from "src/app/store/history-routes/hostory-routes.selectors";
 import { setRoutes } from "src/app/store/history-routes/hostory-routes.actions";
+import { take } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root"
@@ -19,5 +20,12 @@ export class HistoryRoutesDataService {
   }
   updateRoutes(routes: Route[]) {
     this.store.dispatch(setRoutes({ routes }));
+  }
+
+  addRoute(route: Route) {
+    this.historyRoutes$.pipe(take(1)).subscribe(routes => {
+      routes.push(route);
+      this.updateRoutes(routes);
+    });
   }
 }
