@@ -14,7 +14,7 @@ import { ActualRouteStateModule } from "./store/actual-route/actual-route-store.
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { HistoryRoutesStateModul } from "./store/history-routes/history-routes-store.module";
-
+import { IonicStorageModule } from "@ionic/storage";
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -26,7 +26,8 @@ import { HistoryRoutesStateModul } from "./store/history-routes/history-routes-s
     ActualRouteStateModule,
     HistoryRoutesStateModul,
     BrowserAnimationsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    IonicStorageModule.forRoot()
   ],
   providers: [
     BackgroundMode,

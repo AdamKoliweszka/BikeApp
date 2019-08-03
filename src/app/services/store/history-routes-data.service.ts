@@ -24,6 +24,7 @@ export class HistoryRoutesDataService {
 
   addRoute(route: Route) {
     this.historyRoutes$.pipe(take(1)).subscribe(routes => {
+      if (routes == null) routes = [];
       routes.push(route);
       this.updateRoutes(routes);
     });

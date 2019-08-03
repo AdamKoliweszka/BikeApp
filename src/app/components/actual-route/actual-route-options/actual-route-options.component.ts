@@ -8,6 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { HistoryRoutesDataService } from "src/app/services/store/history-routes-data.service";
 import { take } from "rxjs/operators";
+import { HistoryRoutesFileService } from "src/app/services/storage/history-routes-file.service";
 
 @Component({
   selector: "app-actual-route-options",
@@ -23,7 +24,8 @@ export class ActualRouteOptionsComponent implements OnInit {
   @Input() isPause: boolean;
   constructor(
     private actualRouteDataService: ActualRouteDataService,
-    private historyRoutesDataService: HistoryRoutesDataService
+    private historyRoutesDataService: HistoryRoutesDataService,
+    private historyRoutesFileService: HistoryRoutesFileService
   ) {}
 
   ngOnInit() {}
@@ -47,6 +49,12 @@ export class ActualRouteOptionsComponent implements OnInit {
       .subscribe(route => {
         this.historyRoutesDataService.addRoute(route);
         this.actualRouteDataService.stopRegister();
+        this.historyRoutesDataService
+          .getRoutes()
+          .pipe(take(1))
+          .subscribe(routes => {
+            this.historyRoutesFileService.setRoutes(routes);
+          });
       });
   }
 }
