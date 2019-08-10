@@ -1,6 +1,8 @@
 <div class="container">
-  <route-options
-    *ngFor="let route of routes; let i = index"
-    [id]="i"
-  ></route-options>
+  <div class="item" *ngFor="let route of routes; let i = index">
+    <button mat-fab class="close-button" (click)="delete()">
+      <fa-icon class="icon" [icon]="closeIcon"></fa-icon>
+    </button>
+    <route-options [id]="i"></route-options>
+  </div>
 </div>

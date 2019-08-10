@@ -6,6 +6,7 @@ import { HistoryRoutesState } from "src/app/store/history-routes/history-routes.
 import { selectHistoryRoutes } from "src/app/store/history-routes/hostory-routes.selectors";
 import { setRoutes } from "src/app/store/history-routes/hostory-routes.actions";
 import { take } from "rxjs/operators";
+import { HistoryRoutesFileService } from "../storage/history-routes-file.service";
 
 @Injectable({
   providedIn: "root"
@@ -13,7 +14,10 @@ import { take } from "rxjs/operators";
 export class HistoryRoutesDataService {
   private historyRoutes$ = this.store.select(selectHistoryRoutes);
 
-  constructor(private store: Store<HistoryRoutesState>) {}
+  constructor(
+    private store: Store<HistoryRoutesState>,
+    private historyRoutesFileService: HistoryRoutesFileService
+  ) {}
 
   getRoutes(): Observable<Route[]> {
     return this.historyRoutes$;
@@ -39,5 +43,13 @@ export class HistoryRoutesDataService {
         console.log("r");
         return value[id];
       });
+  }
+
+  deleteRouteById(id: number) {
+    this.historyRoutes$.pipe(take(1)).subscribe(routes => {
+      routes.splice(id, 1);
+      this.updateRoutes(routes);
+      this.historyRoutesFileService.setRoutes(routes);
+    });
   }
 }
