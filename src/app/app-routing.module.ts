@@ -12,6 +12,11 @@ const routes: Routes = [
     path: "route",
     loadChildren:
       "./components/route-list/route-list.module#RouteListPageModule"
+  },
+  {
+    path: "historic-routes",
+    loadChildren:
+      "./components/actual-route/actual-route.module#ActualRoutePageModule"
   }
 ];
 

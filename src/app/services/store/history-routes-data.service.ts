@@ -29,4 +29,15 @@ export class HistoryRoutesDataService {
       this.updateRoutes(routes);
     });
   }
+
+  getRouteById(id: number): Promise<Route> {
+    console.log("tutaj");
+    return this.historyRoutes$
+      .pipe(take(1))
+      .toPromise()
+      .then(value => {
+        console.log("r");
+        return value[id];
+      });
+  }
 }

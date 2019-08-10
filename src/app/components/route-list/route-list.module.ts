@@ -9,6 +9,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { ListOfRoutes } from "./list-of-routes/list-of-routes.component";
 import { RouteOptions } from "./route-options/route-options.component";
+import { RouteInfoList } from "./route-list-info/route-list-info.component";
 @NgModule({
   imports: [
     CommonModule,
@@ -20,9 +21,19 @@ import { RouteOptions } from "./route-options/route-options.component";
       {
         path: "",
         component: RouteList
+      },
+      {
+        path: "info/:id",
+        component: RouteInfoList
       }
     ])
   ],
-  declarations: [RouteList, RouteListNew, ListOfRoutes, RouteOptions]
+  declarations: [
+    RouteList,
+    RouteListNew,
+    ListOfRoutes,
+    RouteOptions,
+    RouteInfoList
+  ]
 })
 export class RouteListPageModule {}

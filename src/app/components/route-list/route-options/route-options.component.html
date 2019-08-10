@@ -1,5 +1,7 @@
 <div class="container">
   <button mat-icon-button><fa-icon [icon]="routeIcon"></fa-icon></button>
-  <button mat-icon-button><fa-icon [icon]="infoIcon"></fa-icon></button>
+  <a mat-icon-button [routerLink]="['info', id]"
+    ><fa-icon [icon]="infoIcon"></fa-icon
+  ></a>
   <button mat-icon-button><fa-icon [icon]="chartIcon"></fa-icon></button>
 </div>

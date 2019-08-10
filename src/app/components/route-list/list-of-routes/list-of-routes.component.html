@@ -1,3 +1,6 @@
 <div class="container">
-  <route-options *ngFor="let route of routes"></route-options>
+  <route-options
+    *ngFor="let route of routes; let i = index"
+    [id]="i"
+  ></route-options>
 </div>

@@ -6,24 +6,24 @@ export class Route {
   segments: RouteSegment[];
   actualSpeed: number;
   distance: number;
+  maxSpeed: number;
+  fullTime: number;
 
   constructor() {
     this.segments = [];
     this.actualSpeed = 0;
     this.distance = 0;
+    this.maxSpeed = 0;
+    this.fullTime = 0;
   }
   public addSegment(segment: RouteSegment): void {
+    this.fullTime += segment.timeInMiliseconds;
     this.actualSpeed = segment.speedInKmH;
     this.distance += segment.distanceInKm;
+    if (this.maxSpeed < segment.speedInKmH) this.maxSpeed = segment.speedInKmH;
     this.segments.push(segment);
   }
-  public getFullTime(): number {
-    let time = 0;
-    for (let segment of this.segments) {
-      time += segment.timeInMiliseconds;
-    }
-    return time;
-  }
+
   public getSegments = () => {
     return this.segments;
   };
