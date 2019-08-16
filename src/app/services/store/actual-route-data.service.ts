@@ -71,18 +71,22 @@ export class ActualRouteDataService {
     this.store.dispatch(setIsPause({ isPause }));
   }
 
+  /*
   stopRegister() {
     let actualRoute = new Route();
     let isPause = false;
     let isRegistering = false;
+    
     let actualPosition = new RoutePoint(
       50.86432551549099,
       17.470316290855408,
       new Date()
     );
+    
     this.store.dispatch(setRoute({ actualRoute }));
     this.store.dispatch(setIsPause({ isPause }));
     this.store.dispatch(setIsRegistering({ isRegistering }));
-    this.store.dispatch(setActualPosition({ actualPosition }));
+    //this.store.dispatch(setActualPosition({ actualPosition }));
   }
+  */
 }

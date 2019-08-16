@@ -24,6 +24,7 @@ export class HistoryRoutesDataService {
   }
   updateRoutes(routes: Route[]) {
     this.store.dispatch(setRoutes({ routes }));
+    this.historyRoutesFileService.setRoutes(routes);
   }
 
   addRoute(route: Route) {

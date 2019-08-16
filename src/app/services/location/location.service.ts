@@ -1,7 +1,7 @@
 import { Injectable, ApplicationInitStatus } from "@angular/core";
 import { RoutePoint } from "../../models/RoutePoint/route-point";
 import { Geolocation, Geoposition } from "@ionic-native/geolocation/ngx";
-import { Observable, Subject } from "rxjs";
+import { Observable, Subject, timer, interval } from "rxjs";
 import { GeoLocationOptions } from "./geo-location-options";
 import { ActualRouteDataService } from "../store/actual-route-data.service";
 
@@ -10,18 +10,28 @@ import { ActualRouteDataService } from "../store/actual-route-data.service";
 })
 export class LocationService {
   private watchLocation: Observable<Geoposition>;
-  //private watchRoutePoint: Observable<RoutePoint>;
-  //private locationSubject: Subject<RoutePoint>;
 
   constructor(
     private geoLocation: Geolocation,
     private actualRouteDataService: ActualRouteDataService
   ) {
-    //this.locationSubject = new Subject<RoutePoint>();
     let options = new GeoLocationOptions();
     options.enableHighAccuracy = true;
     this.watchLocation = this.geoLocation.watchPosition(options);
+    interval(500).subscribe(i => {
+      this.geoLocation.getCurrentPosition().then(data => {
+        let actualDate = new Date();
+        let locationPoint = new RoutePoint(
+          data.coords.latitude,
+          data.coords.longitude,
+          actualDate
+        );
+        this.actualRouteDataService.updateActualPosition(locationPoint);
+      });
+    });
+    /*
     this.watchLocation.subscribe(data => {
+      console.log("test");
       let actualDate = new Date();
       let locationPoint = new RoutePoint(
         data.coords.latitude,
@@ -29,13 +39,7 @@ export class LocationService {
         actualDate
       );
       this.actualRouteDataService.updateActualPosition(locationPoint);
-      //this.locationSubject.next(locationPoint);
     });
+    */
   }
-
-  /*
-  watchPosition(): Observable<RoutePoint> {
-    return this.locationSubject.asObservable();
-  }
-  */
 }
