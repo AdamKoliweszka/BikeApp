@@ -1,4 +1,6 @@
 <div>
   Dystans: {{ route.distance }}<br />
-  Czas trasy: {{ route.fullTime | date: "mm:ss" }}
+  Czas trasy: {{ route.fullTime | date: "mm:ss" }} <br />
+  Maksymalna prędkość: {{ route.maxSpeed }}<br />
+  Średnia prędkość: {{ route.averageSpeed }}
 </div>

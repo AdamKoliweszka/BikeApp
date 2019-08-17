@@ -13,33 +13,37 @@ import { Route } from "../../../models/Route/route";
   styleUrls: ["./actual-route-map.component.scss"]
 })
 export class ActualRouteMapComponent implements OnInit {
+  isLoaded: boolean;
   map: MapInstance;
+  actualPositionSubscription: Subscription;
   actualPosition$: Observable<
     RoutePoint
   > = this.actualRouteDataService.getPosition();
+  actualRouteSubscription: Subscription;
   actualRoute$: Observable<Route> = this.actualRouteDataService.getRoute();
-  constructor(private actualRouteDataService: ActualRouteDataService) {}
+  constructor(private actualRouteDataService: ActualRouteDataService) {
+    this.isLoaded = false;
+  }
 
   ngOnInit() {
-    let startPoint = new RoutePoint(
-      50.86432551549099,
-      17.470316290855408,
-      new Date()
-    );
-
-    this.map = new MapInstance("map", startPoint);
-
-    this.map.loadMap();
-    this.map.addMarker(startPoint);
-
-    this.actualPosition$.subscribe(data => {
-      this.map.setFocusPoint(data);
-      this.map.updatePositionOfMarker(data);
+    this.actualPositionSubscription = this.actualPosition$.subscribe(data => {
+      if (!this.isLoaded) {
+        this.map = new MapInstance("map", data);
+        this.map.loadMap();
+        this.map.addMarker(data);
+        this.map.setFocusPoint(data);
+        this.isLoaded = true;
+      } else {
+        this.map.updatePositionOfMarker(data);
+      }
     });
     this.actualRoute$.subscribe(data => {
       this.map.updateDataOfRouteLayer("tour", data);
     });
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() {
+    this.actualPositionSubscription.unsubscribe();
+    this.actualRouteSubscription.unsubscribe();
+  }
 }
